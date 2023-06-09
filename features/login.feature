@@ -3,7 +3,6 @@
 
 Feature: User login and logout scenarios
 
-  @temp
   Scenario: Valid user login
     Given I open the web page
     When I login as a "standard" user
