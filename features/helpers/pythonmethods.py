@@ -25,3 +25,36 @@ class HelperMethods:
         with open(path, "r") as openfile:
             data = json.load(openfile)
             return data
+
+    # This function will accept a list of elements (prices), then extract the text(prices) from those elements
+    # and put them into a new list.
+    # Then it removes the $ symbol from all the prices and converts the list of strings
+    # into a list of numbers and returns it
+    def ConvertPricesToFloat(Prices):
+        RawPrices = []
+
+        i = 0
+        while (i < len(Prices)):
+            RawPrices.append(Prices[i].text)
+            i = i + 1
+
+        StringPrices = [sub[1:] for sub in RawPrices]
+        NumberPrices = [eval(i) for i in StringPrices]
+
+        return NumberPrices
+
+    # This function will accept a list of elements (Names), then extract the text(Names) from those elements
+    # and put them into a new list and returns it
+    def FormatNames(Names):
+        RawNames = []
+
+        i = 0
+        while (i < len(Names)):
+            RawNames.append(Names[i].text)
+            i = i + 1
+
+        return RawNames
+
+    @staticmethod
+    def ClearTempData():
+        open("features/helpers/tempdata.json", 'w').close()

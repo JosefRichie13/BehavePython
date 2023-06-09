@@ -10,3 +10,6 @@ class Selectors:
     LogoutButton = "logout_sidebar_link"
     LoginPageTitle = "login_logo"
     CartButton = "shopping_cart_link"
+    PricesList = "inventory_item_price"
+    SortOption = "product_sort_container"
+    ProductList = "inventory_item_name"
