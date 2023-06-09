@@ -4,7 +4,7 @@ import json
 
 from selenium.webdriver.common.by import By
 
-
+# This method returns False when an element is not found
 def ElementNotDisplayed(context, element):
     try:
         assert context.driver.find_element(By.CLASS_NAME, element).is_displayed() == True
