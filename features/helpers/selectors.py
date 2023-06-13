@@ -13,3 +13,6 @@ class Selectors:
     PricesList = "inventory_item_price"
     SortOption = "product_sort_container"
     ProductList = "inventory_item_name"
+    AddToCartButton = "btn.btn_primary.btn_small.btn_inventory"
+    CartNumber = "shopping_cart_badge"
+    RemoveFromCartButton = "btn.btn_secondary.btn_small.btn_inventory"

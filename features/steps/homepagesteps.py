@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -85,3 +87,31 @@ def SortIsCorrect(context, SortOption):
 
         case default:
             print(SortOption + " not supported")
+
+
+# This method adds a product to the cart. It gets all the names of the product and calls a helper method which puts the
+# names in a list. Then gets the index of the product from the feature file and then clicks on it.
+@when('I add "{Product}" to the cart')
+def SelectTheProduct(context, Product):
+    Names = context.driver.find_elements(By.CLASS_NAME, Selectors.ProductList)
+    NamesFromUI = HelperMethods.FormatNames(Names)
+
+    Index = NamesFromUI.index(Product)
+    context.driver.find_elements(By.CLASS_NAME, Selectors.AddToCartButton)[Index].click()
+
+
+# This method confirms the number of products in the cart
+@when('I confirm that the cart has "{Number}" products')
+def ConfirmNumberInCart(context, Number):
+    assert context.driver.find_element(By.CLASS_NAME, Selectors.CartNumber).text == Number
+
+
+# This method removes a product from the cart. It gets all the names of the product and calls a helper method which
+# puts the names in a list. Then gets the index of the product from the feature file and then clicks on it.
+@when('I remove "{Product}" from the cart')
+def RemoveTheProduct(context, Product):
+    Names = context.driver.find_elements(By.CLASS_NAME, Selectors.ProductList)
+    NamesFromUI = HelperMethods.FormatNames(Names)
+
+    Index = NamesFromUI.index(Product)
+    context.driver.find_elements(By.CLASS_NAME, Selectors.RemoveFromCartButton)[Index].click()

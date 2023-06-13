@@ -30,3 +30,13 @@ Feature: Home Page Scenarios
     And I note all the "names" in the homepage
     And I select the "Name (A to Z)" sort option
     Then I confirm that the "Name (A to Z)" sort is correct
+
+  Scenario: Cart bubble counter increases and decreases
+    Given I open the web page
+    When I login as a "standard" user
+    And I add "Sauce Labs Backpack" to the cart
+    And I add "Sauce Labs Onesie" to the cart
+    And I add "Sauce Labs Bike Light" to the cart
+    And I confirm that the cart has "3" products
+    And I remove "Sauce Labs Bike Light" from the cart
+    And I confirm that the cart has "2" products
