@@ -25,3 +25,5 @@ class Selectors:
     FinishButton = "finish"
     CheckoutBanner = "complete-header"
     ResetApp = "reset_sidebar_link"
+    TotalPriceBeforeTax = "summary_subtotal_label"
+    TotalPriceAfterTax = "summary_info_label.summary_total_label"

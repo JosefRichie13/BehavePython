@@ -1,6 +1,6 @@
 from behave import *
 from selenium.webdriver.common.by import By
-
+import re
 from features.helpers.selectors import Selectors
 
 
@@ -37,3 +37,23 @@ def IConfirmTheOrder(context):
 @then('I should see "{Message}" after the order is placed')
 def SeeTheMessageAfterOrder(context, Message):
     assert context.driver.find_element(By.CLASS_NAME, Selectors.CheckoutBanner).text == Message
+
+# This method calculates Tax at 8% and verifies it its applied
+# It first gets the non taxed total price from the UI and removes all the $ symbols.
+# Then it multiplies it by 0.08 and rounds it to 2 decimals, giving us the 8% tax rate
+# Then the non taxed price and the tax rate are added
+# Finally it gets the taxed total price from the UI and removed all the $ symbol
+# Then asserts if the prices from the UI and the calculated price are the same
+@then('I confirm that the tax is calculated at 8 percent')
+def TaxCalculation(context):
+    PriceBeforeTax = context.driver.find_element(By.CLASS_NAME, Selectors.TotalPriceBeforeTax).text
+    OnlyPriceBeforeTax = re.findall("\d+\.\d+", PriceBeforeTax)[0]
+    TaxAdded = 0.08 * float(OnlyPriceBeforeTax)
+    RoundedTaxAdded = round(TaxAdded, 2)
+    PriceAfterTax = float(OnlyPriceBeforeTax) + float(RoundedTaxAdded)
+
+    PriceAfterTaxFromUI = context.driver.find_element(By.CLASS_NAME, Selectors.TotalPriceAfterTax).text
+    OnlyPriceAfterTaxFromUI = re.findall("\d+\.\d+", PriceAfterTaxFromUI)[0]
+
+    assert str(PriceAfterTax) == str(OnlyPriceAfterTaxFromUI)
+
