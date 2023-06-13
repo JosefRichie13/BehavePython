@@ -24,3 +24,4 @@ class Selectors:
     ContinueButton = "continue"
     FinishButton = "finish"
     CheckoutBanner = "complete-header"
+    ResetApp = "reset_sidebar_link"

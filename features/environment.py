@@ -4,6 +4,7 @@ from selenium import webdriver
 import chromedriver_autoinstaller
 import edgedriver_autoinstaller
 from features.helpers.pythonmethods import HelperMethods
+from features.helpers.seleniummethods import ResetAppState
 
 
 def before_all(context):
@@ -13,8 +14,8 @@ def before_all(context):
     chromedriver_autoinstaller.install()
     context.driver = webdriver.Chrome()
 
-    #edgedriver_autoinstaller.install()
-    #context.driver = webdriver.Edge()
+    # edgedriver_autoinstaller.install()
+    # context.driver = webdriver.Edge()
 
     context.driver.implicitly_wait(10)
 
@@ -24,3 +25,9 @@ def after_all(context):
     # here. If we have any cleanup methods, put it above driver quit method.
     HelperMethods.ClearTempData()
     context.driver.quit()
+
+
+def before_feature(context, feature):
+    # This is the before feature method. This will be executed before the specified feature is run
+    if feature.name == "Product Checkout Scenarios":
+        ResetAppState(context)
