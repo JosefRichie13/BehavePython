@@ -27,7 +27,8 @@ def after_all(context):
     context.driver.quit()
 
 
-def before_feature(context, feature):
-    # This is the before feature method. This will be executed before the specified feature is run
-    if feature.name == "Product Checkout Scenarios":
+def before_tag(context, tag):
+    # This is the before tag method. This will be executed before the specified tag is run
+    if tag == "cleanappstate":
         ResetAppState(context)
+

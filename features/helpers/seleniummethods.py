@@ -21,3 +21,4 @@ def ResetAppState(context):
     context.driver.find_element(By.ID, Selectors.LoginButton).click()
     context.driver.find_element(By.ID, Selectors.Menu).click()
     context.driver.find_element(By.ID, Selectors.ResetApp).click()
+    context.driver.find_element(By.ID, Selectors.CloseMenu).click()

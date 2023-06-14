@@ -2,6 +2,7 @@ from behave import *
 from selenium.webdriver.common.by import By
 import re
 from features.helpers.selectors import Selectors
+from features.helpers.pythonmethods import HelperMethods
 
 
 # This method clicks on the cart
@@ -38,6 +39,7 @@ def IConfirmTheOrder(context):
 def SeeTheMessageAfterOrder(context, Message):
     assert context.driver.find_element(By.CLASS_NAME, Selectors.CheckoutBanner).text == Message
 
+
 # This method calculates Tax at 8% and verifies it its applied
 # It first gets the non taxed total price from the UI and removes all the $ symbols.
 # Then it multiplies it by 0.08 and rounds it to 2 decimals, giving us the 8% tax rate
@@ -57,3 +59,42 @@ def TaxCalculation(context):
 
     assert PriceAfterTax == float(OnlyPriceAfterTaxFromUI)
 
+
+# This method gets the total price in the cart and writes it as a Json to the temp file
+@when('I get the total price in the cart')
+def GetTheTotalPriceInTheCart(context):
+    PriceAfterTaxFromUI = context.driver.find_element(By.CLASS_NAME, Selectors.TotalPriceAfterTax).text
+    OnlyPriceAfterTaxFromUI = re.findall("\d+\.\d+", PriceAfterTaxFromUI)[0]
+
+    PriceInJson = {"Price": OnlyPriceAfterTaxFromUI}
+
+    HelperMethods.WriteToFile(PriceInJson, "features/helpers/tempData.json")
+
+
+# This method goes to the main page, i.e. the page with all the products
+@when('I go to the main page')
+def IGoToTheMainPage(context):
+    context.driver.find_element(By.ID, Selectors.Menu).click()
+    context.driver.find_element(By.ID, Selectors.MainPage).click()
+
+
+# This method confirms if the price is increased or decreased
+# It gets the total price from the UI and compares it against the stored price in the temp file
+@then('I confirm that the price is "{Status}"')
+def ConfirmPriceStatus(context, Status):
+    PriceAfterTaxFromUI = context.driver.find_element(By.CLASS_NAME, Selectors.TotalPriceAfterTax).text
+    OnlyPriceAfterTaxFromUI = re.findall("\d+\.\d+", PriceAfterTaxFromUI)[0]
+
+    Price = HelperMethods.ReadFromFile("features/helpers/tempData.json")
+    PriceFromJson = Price["Price"]
+
+    match Status:
+        case "decreased":
+            print(OnlyPriceAfterTaxFromUI)
+            print(PriceFromJson)
+            assert float(OnlyPriceAfterTaxFromUI) < float(PriceFromJson)
+
+        case "increased":
+            print(OnlyPriceAfterTaxFromUI)
+            print(PriceFromJson)
+            assert float(OnlyPriceAfterTaxFromUI) > float(PriceFromJson)

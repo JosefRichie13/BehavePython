@@ -25,5 +25,7 @@ class Selectors:
     FinishButton = "finish"
     CheckoutBanner = "complete-header"
     ResetApp = "reset_sidebar_link"
+    CloseMenu = "react-burger-cross-btn"
     TotalPriceBeforeTax = "summary_subtotal_label"
     TotalPriceAfterTax = "summary_info_label.summary_total_label"
+    MainPage = "inventory_sidebar_link"
