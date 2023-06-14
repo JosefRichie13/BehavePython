@@ -55,5 +55,5 @@ def TaxCalculation(context):
     PriceAfterTaxFromUI = context.driver.find_element(By.CLASS_NAME, Selectors.TotalPriceAfterTax).text
     OnlyPriceAfterTaxFromUI = re.findall("\d+\.\d+", PriceAfterTaxFromUI)[0]
 
-    assert str(PriceAfterTax) == str(OnlyPriceAfterTaxFromUI)
+    assert PriceAfterTax == float(OnlyPriceAfterTaxFromUI)
 
