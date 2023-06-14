@@ -2,7 +2,7 @@
 
 This repo has the code which implements a Selenium Test framework using BDD (Behave) for the website, https://www.saucedemo.com/
 
-###**Create a new project in PyCharm**
+### **Create a new project in PyCharm**
 
 - Install behave -- pip install behave
 
@@ -32,7 +32,7 @@ reporting setup.
 
 - Follow the steps here to setup reporting: https://pypi.org/project/behave-html-prettyformatter/
 
-###**Running commands:**
+### **Running commands:**
 - behave --no-capture => Executes all the feature files and prints any print statement to the
 terminal
 
@@ -46,7 +46,7 @@ the feature files and stores the report in the reports folder.
 
 - behave --no-capture --tags=temp => Executes only the scenarios with the tag ‘temp’
 
-###**Minimum ensured things:**
+### **Minimum ensured things:**
 - Steps are sharable between Feature files seamlessly.
 
 - DataTable support is present.
@@ -58,7 +58,7 @@ need of using global variables for the same.
 
 - A reporting feature to create sharable HTML reports.
 
-###**Links:**
+### **Links:**
 - GitHub repo: https://github.com/JosefRichie13/BehavePython
 
 - Behave docs: https://behave.readthedocs.io/en/latest/
@@ -69,5 +69,5 @@ need of using global variables for the same.
 
 - Edge Webdriver Auto installer: https://pypi.org/project/edgedriver-autoinstaller/
 
-###**Folder Structure**
+### **Folder Structure**
 ![img.png](img.png)
