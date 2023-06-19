@@ -90,11 +90,7 @@ def ConfirmPriceStatus(context, Status):
 
     match Status:
         case "decreased":
-            print(OnlyPriceAfterTaxFromUI)
-            print(PriceFromJson)
             assert float(OnlyPriceAfterTaxFromUI) < float(PriceFromJson)
 
         case "increased":
-            print(OnlyPriceAfterTaxFromUI)
-            print(PriceFromJson)
             assert float(OnlyPriceAfterTaxFromUI) > float(PriceFromJson)

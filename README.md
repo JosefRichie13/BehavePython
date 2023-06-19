@@ -1,6 +1,6 @@
 # BehavePython
 
-This repo has the code which implements a Selenium Test framework using BDD (Behave) for the website, https://www.saucedemo.com/
+This repo has the code which implements a Selenium Test framework using BDD (Behave) for the website, https://www.saucedemo.com/ and API testing using Python Requests for https://automationexercise.com/api_list
 
 ### **Create a new project in PyCharm**
 
