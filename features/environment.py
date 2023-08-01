@@ -1,21 +1,34 @@
 # This is the environment.py file. This hosts all the drivers and includes the before and after methods.
 
-import geckodriver_autoinstaller
 from selenium import webdriver
+import geckodriver_autoinstaller
 import chromedriver_autoinstaller
 import edgedriver_autoinstaller
+
 from features.helpers.pythonmethods import HelperMethods
 from features.helpers.seleniummethods import ResetAppState
 
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
 # This is the before, this method is executed before all the tests, so we are initializing the driver here
 # It uses the auto installer, so no need to specify a driver directly
 def before_all(context):
-    chromedriver_autoinstaller.install()
-    context.driver = webdriver.Chrome()
 
-    # edgedriver_autoinstaller.install()
-    # context.driver = webdriver.Edge()
+    # New Selenium Webdriver Manager
+    #context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    #context.driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+    context.driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+
+    # Old auto installer drivers
+    #chromedriver_autoinstaller.install()
+    #edgedriver_autoinstaller.install()
+    #context.driver = webdriver.Edge()
 
     context.driver.implicitly_wait(10)
 
