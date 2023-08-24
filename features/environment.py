@@ -25,6 +25,11 @@ def before_all(context):
     #context.driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
     context.driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
+    # Headless mode
+    # BrowserOptions = webdriver.ChromeOptions()
+    # BrowserOptions.add_argument("--headless=new")
+    # context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=BrowserOptions)
+
     # Old auto installer drivers
     #chromedriver_autoinstaller.install()
     #edgedriver_autoinstaller.install()
